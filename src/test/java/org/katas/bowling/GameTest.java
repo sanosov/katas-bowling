@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.stream.IntStream;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class GameTest
@@ -39,6 +40,16 @@ public class GameTest
 		rollMany(1, 20);
 
 		assertExpectedScore(20);
+	}
+
+	@Ignore
+	@Test
+	public void testRollWithSpare()
+	{
+		rollMany(5,2);
+		rollMany(1,18);
+
+		assertExpectedScore(29);
 	}
 
 	private void assertExpectedScore(final int expectedScore)

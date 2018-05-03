@@ -1,17 +1,21 @@
 package org.katas.bowling;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Game
 {
-	private int score;
+	private List<Integer> rolledPins = new ArrayList<>();
 
 	public int getScore()
 	{
-		return score;
+		return rolledPins.stream().collect(Collectors.summingInt(Integer::intValue));
 	}
 
 	public void roll(int pins)
 	{
-		score += pins;
+		rolledPins.add(pins);
 	}
 }
 
