@@ -1,0 +1,33 @@
+# Mac OS X 
+*.DS_Store
+
+# IntelliJ IDEA 
+*.idea*
+*.iml
+*.info
+
+# JMeter
+*.log
+*nohup.out
+
+# Eclipse/STS 
+.classpath
+.project
+.settings
+*/bin
+
+# Maven 
+target/
+release.properties
+*.bak
+dependency-reduced-pom.xml
+
+# Bamboo
+build-number.txt
+
+#Embedded jms persistence
+brokerdb*/
+
+#KahaDB
+db.*
+lock
