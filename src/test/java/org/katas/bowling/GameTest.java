@@ -20,17 +20,34 @@ public class GameTest
 
 
 	@Test
-	public void testGameStart() {
-		final int score = game.getScore();
-		assertEquals(score, 0);
+	public void testGameStart()
+	{
+		assertExpectedScore(0);
 	}
 
 	@Test
 	public void testGutterGame()
 	{
-		IntStream.range(1, 20).forEach(i -> game.roll(0));
+		rollMany(0, 20);
 
-		final int score = game.getScore();
-		assertEquals(0, score);
+		assertExpectedScore(0);
+	}
+
+	@Test
+	public void testRollWithScore()
+	{
+		rollMany(1, 20);
+
+		assertExpectedScore(20);
+	}
+
+	private void assertExpectedScore(final int expectedScore)
+	{
+		assertEquals(expectedScore, game.getScore());
+	}
+
+	private void rollMany(final int pins, final int numberOfRolls)
+	{
+		IntStream.range(0, numberOfRolls).forEach(i -> game.roll(pins));
 	}
 }
