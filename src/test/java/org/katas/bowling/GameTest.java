@@ -1,12 +1,16 @@
 package org.katas.bowling;
 
+import junit.framework.TestCase;
 import org.junit.Test;
 
-public class GameTest
-{
+public class GameTest extends TestCase
+{	
+
 	@Test
-	public void testCanCreateGame()
-	{
-		final Game game = new Game();
+	public void testGameStart() {
+		final Game g  = new Game();
+		int score = g.getScore();
+		assertEquals(score, 0);
 	}
+	
 }
