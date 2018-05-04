@@ -6,8 +6,14 @@ import java.util.List;
 public class Game
 {
 	private static final int FRAMES_IN_GAME = 10;
+	private static final int ALL_PINS = 10;
 
 	private List<Integer> rolledPins = new ArrayList<>();
+
+	public void roll(final int pins)
+	{
+		rolledPins.add(pins);
+	}
 
 	public int getScore()
 	{
@@ -17,25 +23,29 @@ public class Game
 			int firstRollInFrame = 0;
 			for (int frame = 0; frame < FRAMES_IN_GAME; frame++)
 			{
-				if (rolledPins.get(firstRollInFrame) == 10)
+				if (isStrike(firstRollInFrame))
 				{
-					totalScore += rolledPins.get(firstRollInFrame) + rolledPins.get(firstRollInFrame + 1) + rolledPins.get(firstRollInFrame + 2);
+					totalScore += ALL_PINS + nextTwoRollsScore(firstRollInFrame);
 					firstRollInFrame++;
-				}
-				else if (isSpare(firstRollInFrame))
-				{
-					totalScore += rolledPins.get(firstRollInFrame) + rolledPins.get(firstRollInFrame + 1) + rolledPins.get(firstRollInFrame + 2);
-					firstRollInFrame += 2;
 				}
 				else
 				{
-					totalScore += rolledPins.get(firstRollInFrame) + rolledPins.get(firstRollInFrame + 1);
+					totalScore += frameScore(firstRollInFrame);
+					if (isSpare(firstRollInFrame))
+					{
+						totalScore += firstRollInNextFrame(firstRollInFrame);
+					}
 					firstRollInFrame += 2;
 				}
 			}
 			return totalScore;
 		}
 		return 0;
+	}
+
+	private boolean isStrike(final int firstRollInFrame)
+	{
+		return rolledPins.get(firstRollInFrame) == ALL_PINS;
 	}
 
 	private boolean gameStarted()
@@ -45,12 +55,22 @@ public class Game
 
 	private boolean isSpare(final int i)
 	{
-		return rolledPins.get(i) + rolledPins.get(i + 1) == 10;
+		return frameScore(i) == ALL_PINS;
 	}
 
-	public void roll(int pins)
+	private int frameScore(final int firstRollInFrame)
 	{
-		rolledPins.add(pins);
+		return rolledPins.get(firstRollInFrame) + rolledPins.get(firstRollInFrame + 1);
+	}
+
+	private int nextTwoRollsScore(final int currRoll)
+	{
+		return rolledPins.get(currRoll + 1) + rolledPins.get(currRoll + 2);
+	}
+
+	private Integer firstRollInNextFrame(final int firstRollInFrame)
+	{
+		return rolledPins.get(firstRollInFrame + 2);
 	}
 }
 

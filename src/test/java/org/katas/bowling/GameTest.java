@@ -53,15 +53,21 @@ public class GameTest
 	@Test
 	public void testRollWithStrike()
 	{
-		game.roll(10);
+		strike();
 		rollMany(1,18);
 
 		assertExpectedScore(30);
 	}
 
+	private void strike()
+	{
+		game.roll(10);
+	}
+
 	private void spare()
 	{
-		rollMany(5,2);
+		game.roll(9);
+		game.roll(1);
 	}
 
 	private void assertExpectedScore(final int expectedScore)
