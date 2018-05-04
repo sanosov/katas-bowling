@@ -50,6 +50,15 @@ public class GameTest
 		assertExpectedScore(29);
 	}
 
+	@Test
+	public void testRollWithStrike()
+	{
+		game.roll(10);
+		rollMany(1,18);
+
+		assertExpectedScore(30);
+	}
+
 	private void spare()
 	{
 		rollMany(5,2);
